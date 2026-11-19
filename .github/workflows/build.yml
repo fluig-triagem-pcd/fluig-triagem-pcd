@@ -11,15 +11,21 @@ jobs:
       - name: Baixar o codigo
         uses: actions/checkout@v4
 
-      - name: Instalar Java 11
+      - name: Instalar Java 11 e configurar acesso ao Nexus
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '11'
           cache: maven
+          server-id: nexus
+          server-username: NEXUS_USER
+          server-password: NEXUS_PASS
 
       - name: Compilar (Maven)
         run: mvn -B clean install
+        env:
+          NEXUS_USER: ${{ secrets.NEXUS_USER }}
+          NEXUS_PASS: ${{ secrets.NEXUS_PASS }}
 
       - name: Guardar o .ear e o .war
         if: success()
