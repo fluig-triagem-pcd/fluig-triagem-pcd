@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.totvs</groupId>
+		<artifactId>start-public-process</artifactId>
+		<version>${revision}</version>
+	</parent>
+	<artifactId>api-start-public-process</artifactId>
+	<packaging>pom</packaging>
+
+	<name>API Service exemplo de como iniciar um processo público</name>
+	<description>API Service exemplo de como iniciar um processo público</description>
+
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<name>fluig Nexus Repository</name>
+			<url>https://nexus.fluig.com/content/groups/public/</url>
+		</repository>
+	</repositories>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<fluig.version>2.0.0</fluig.version>
+	</properties>
+
+	<modules>
+		<module>api-rest-start-public-process</module>
+		<module>api-pack-start-public-process</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>8.0.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.fluig</groupId>
+				<artifactId>fluig-api-tools</artifactId>
+				<version>1.1.3</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>oauth.signpost</groupId>
+				<artifactId>signpost-core</artifactId>
+				<version>2.1.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.4.0</version>
+				<configuration>
+					<warSourceExcludes>**/.js,**/.css</warSourceExcludes>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<archive>
+						<manifestEntries>
+							<Dependencies>com.fluig.common</Dependencies>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.12.1</version>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
+			</plugin>
+		</plugins>
+		<finalName>${project.artifactId}</finalName>
+	</build>
+
+</project>
