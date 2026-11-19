@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component>
+    <code>start_public_process_api</code>
+    <title>API Triagem PCD (pagina publica)</title>
+    <description>API publica para iniciar o processo triagem_pcd</description>
+    <version>1.0.0</version>
+    <category>Store</category>
+    <developer>Atakarejo TI</developer>
+    <activationClass>activator/start-public-process</activationClass>
+</component>
