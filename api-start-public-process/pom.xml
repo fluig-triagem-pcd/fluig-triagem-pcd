@@ -24,7 +24,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<fluig.version>2.0.0</fluig.version>
+		<fluig.version>1.8.2</fluig.version>
 	</properties>
 
 	<modules>
