@@ -1,0 +1,9 @@
+application.type=service
+application.code=start_public_process_api
+application.title=API Triagem PCD
+application.description=API publica para iniciar o processo triagem_pcd
+application.category=Fluig Store
+application.version=1.0.0
+developer.code=atakarejo
+developer.name=Atakarejo TI
+developer.url=https://www.atakarejo.com.br
