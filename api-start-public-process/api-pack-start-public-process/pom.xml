@@ -20,17 +20,18 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
+<dependency>
 			<groupId>com.fluig</groupId>
 			<artifactId>foundation-common</artifactId>
 			<version>${fluig.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.fluig</groupId>
 			<artifactId>foundation-cache-module</artifactId>
 			<version>${fluig.version}</version>
-		</dependency>
-		<dependency>
+			<scope>provided</scope>
+	</dependency>
 			<groupId>com.totvs</groupId>
 			<artifactId>api-rest-start-public-process</artifactId>
 			<version>${revision}</version>
