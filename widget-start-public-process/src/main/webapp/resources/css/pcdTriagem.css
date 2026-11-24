@@ -1,0 +1,6 @@
+.pcd-triagem { max-width: 640px; margin: 0 auto; padding: 16px; }
+.pcd-triagem .pcd-aviso { color: #555; margin-bottom: 16px; }
+.pcd-triagem .pcd-isca { position: absolute; left: -9999px; height: 0; overflow: hidden; }
+.pcd-triagem .pcd-msg { margin-top: 12px; font-weight: bold; }
+.pcd-triagem .pcd-msg.ok { color: #2e7d32; }
+.pcd-triagem .pcd-msg.erro { color: #c62828; }
