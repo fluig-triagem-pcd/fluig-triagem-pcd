@@ -1,0 +1,15 @@
+application.type=widget
+application.code=triagem_pcd_widget
+application.title=Triagem PCD
+application.description=Formulario publico de triagem PCD - Saude Ocupacional
+application.category=Atakarejo
+application.renderer=freemarker
+developer.code=atakarejo
+developer.name=Atakarejo TI
+developer.url=https://www.atakarejo.com.br
+view.file=view.ftl
+edit.file=edit.ftl
+application.uiwidget=true
+application.resource.js.1=/resources/js/pcdTriagem.js
+application.resource.css.2=/resources/css/pcdTriagem.css
+simple.deploy=false
