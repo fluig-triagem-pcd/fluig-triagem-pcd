@@ -165,7 +165,7 @@ public class PublicPageRest {
         } catch (Exception e) {
             // sem dados do formulario no log
             LOG.log(Level.SEVERE, "Falha inesperada ao enviar triagem PCD: " + e.getClass().getName());
-            return resposta(500, false, "Nao foi possivel concluir o envio.", null);
+            return resposta(500, false, "Nao foi possivel concluir o envio. [DIAG " + e.getClass().getName() + ": " + String.valueOf(e.getMessage()) + "]", null);
         }
     }
 
