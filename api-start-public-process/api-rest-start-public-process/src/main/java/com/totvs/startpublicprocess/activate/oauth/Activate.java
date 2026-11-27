@@ -5,7 +5,6 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
-import com.fluig.customappkey.Keyring;
 import com.fluig.sdk.api.component.activation.ActivationEvent;
 import com.fluig.sdk.api.component.activation.ActivationListener;
 
@@ -38,7 +37,7 @@ public class Activate implements ActivationListener {
 
     @Override
     public void enable(ActivationEvent evt) throws Exception {
-        Keyring.provision(APP_KEY);
+        // credenciais OAuth agora vem do pacote (fluig-oauth.properties); nada a provisionar
     }
 
 }
