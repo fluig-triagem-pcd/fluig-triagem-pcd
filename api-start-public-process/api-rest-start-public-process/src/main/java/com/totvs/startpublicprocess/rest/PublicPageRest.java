@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.concurrent.ConcurrentHashMap;
@@ -33,9 +34,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.servlet.http.HttpServletRequest;
 
-import com.fluig.customappkey.Keyring;
-import com.fluig.sdk.api.customappkey.KeyVO;
-import com.totvs.startpublicprocess.activate.oauth.Activate;
 
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.basic.DefaultOAuthConsumer;
@@ -169,14 +167,37 @@ public class PublicPageRest {
         }
     }
 
+    /** Le as credenciais OAuth gravadas no pacote pelo build (GitHub Secrets). Nada fica no codigo-fonte. */
+    private static Properties carregarCredenciais() throws Exception {
+        Properties p = new Properties();
+        InputStream in = PublicPageRest.class.getClassLoader().getResourceAsStream("fluig-oauth.properties");
+        if (in == null) {
+            throw new IllegalStateException("fluig-oauth.properties ausente no pacote");
+        }
+        try {
+            p.load(in);
+        } finally {
+            in.close();
+        }
+        String[] chaves = { "base.url", "consumer.key", "consumer.secret", "token", "token.secret" };
+        for (String c : chaves) {
+            String v = p.getProperty(c);
+            if (v == null || v.trim().isEmpty()) {
+                throw new IllegalStateException("credencial ausente: " + c);
+            }
+            p.setProperty(c, v.trim());
+        }
+        return p;
+    }
+
     private Response iniciarProcesso(String payload) throws Exception {
         HttpURLConnection conn = null;
         try {
-            KeyVO key = Keyring.getKeys(TENANT_ID, Activate.APP_KEY);
-            OAuthConsumer consumer = new DefaultOAuthConsumer(key.getConsumerKey(), key.getConsumerSecret());
-            consumer.setTokenWithSecret(key.getToken(), key.getTokenSecret());
+            Properties cfg = carregarCredenciais();
+            OAuthConsumer consumer = new DefaultOAuthConsumer(cfg.getProperty("consumer.key"), cfg.getProperty("consumer.secret"));
+            consumer.setTokenWithSecret(cfg.getProperty("token"), cfg.getProperty("token.secret"));
 
-            URL url = new URL(key.getDomainUrl() + "/process-management/api/v2/processes/" + PROCESS_ID + "/start");
+            URL url = new URL(cfg.getProperty("base.url") + "/process-management/api/v2/processes/" + PROCESS_ID + "/start");
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setConnectTimeout(15000);
